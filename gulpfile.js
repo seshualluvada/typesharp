@@ -8,6 +8,8 @@ var runSequence = require('run-sequence');
 var uglify = require('gulp-uglify');
 var concat = require('gulp-concat');
 var jasmine = require('gulp-jasmine');
+var filenames = require('gulp-filenames');
+var gprint = require('gulp-print');
 
 gulp.task('cleanscripts', function(){
     return del(['dev-build/scripts/**/*.js','dev-build/scripts/**/*.js.map', 'dev-build/scripts/**/*.d.ts']);
@@ -54,6 +56,11 @@ gulp.task('concatwithcode', function(){
     return gulp.src(['dev-build/scripts/TypeSharp.js', 'dev-build/spec/TypeSharpSpecs.js'])
     .pipe(concat('specfile.js'))
     .pipe(gulp.dest('dev-build/spec/')); 
+});
+
+gulp.task('printfiles', function(){
+   return gulp.src(['**/*.*','!node_modules/**/*.*'])
+     .pipe(gprint());
 });
 
 gulp.task('cleanall',['cleanscripts','cleanspecs']);
