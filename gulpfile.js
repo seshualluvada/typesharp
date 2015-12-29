@@ -53,7 +53,7 @@ gulp.task('compilespecs', function(){
 });
 
 gulp.task('concatwithcode', function(){
-    return gulp.src(['dev-build/scripts/TypeSharp.js', 'dev-build/spec/TypeSharpSpecs.js'])
+    return gulp.src(['dev-build/scripts/typesharp.js', 'dev-build/spec/typesharpspecs.js'])
     .pipe(concat('specfile.js'))
     .pipe(gulp.dest('dev-build/spec/')); 
 });
