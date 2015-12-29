@@ -1,0 +1,31 @@
+{
+  "name": "typesharp",
+  "version": "1.0.0",
+  "description": "This project implements .Net Framework C# types in typescript for a familiar development experience in typescript.",
+  "scripts": {
+    "test": "jasmine"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seshualluvada/typesharp.git"
+  },
+  "author": "Seshu Kumar Alluvada",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/seshualluvada/typesharp/issues"
+  },
+  "homepage": "https://github.com/seshualluvada/typesharp#readme",
+  "devDependencies": {
+    "del": "^2.2.0",
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-jasmine": "^2.2.1",
+    "gulp-shell": "^0.5.1",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-typescript": "^2.10.0",
+    "gulp-uglify": "^1.5.1",
+    "jasmine": "^2.4.1",
+    "merge2": "^0.3.6",
+    "run-sequence": "^1.1.5"
+  }
+}

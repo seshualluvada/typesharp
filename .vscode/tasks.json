@@ -1,0 +1,22 @@
+{
+    "version": "0.1.0",
+    "command": "gulp",
+    "isShellCommand": true,
+    "tasks": [
+		{
+			"taskName": "buildall",
+			"isBuildCommand": true,
+			"showOutput": "always"
+		},
+        {
+			"taskName": "executetests",
+			"isTestCommand": true,
+			"showOutput": "always"
+		},
+        {
+			"taskName": "cleanall",
+			"showOutput": "silent"
+		}
+        
+	]
+}

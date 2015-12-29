@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "noImplicitAny": true,
+        "removeComments": true,
+        "preserveConstEnums": true,
+        "noEmitOnError": true,
+        "sourceMap": false,
+        "declaration": true,
+        "outFile": "prod-build/scripts/TypeSharp.js",
+        "target": "es5"
+    },
+    "exclude": [
+        "node_modules"
+    ]
+}

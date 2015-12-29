@@ -1,0 +1,11 @@
+{
+  "spec_dir": "dev-build",
+  "spec_files": [
+    "spec/specfile.js"
+  ],
+  "helpers": [
+    "../scripts/**/*.js"
+  ],
+  "stopSpecOnExpectationFailure": false,
+  "random": false
+}
