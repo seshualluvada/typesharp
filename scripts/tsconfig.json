@@ -6,7 +6,7 @@
         "noEmitOnError": true,
         "sourceMap": true,
         "declaration": true,
-        "outFile": "dev-build/scripts/TypeSharp.js",
+        "outFile": "dev-build/scripts/typesharp.js",
         "target": "es5"
     },
     "exclude": [
