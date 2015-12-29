@@ -5,4 +5,5 @@ before_install:
 - npm install
 script:
 - gulp buildall
+- gulp printfiles
 - gulp runspecs
