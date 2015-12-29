@@ -35,8 +35,7 @@ To do items:
 Implements the Publish Subscribe Event Notification Pattern with support for subscribers to pause nofications, hold missed notifications and resume notifications for better performance e.g. Subscribers responsible for updating the UI of a page pause notifications once that UI element goes out of view of the user and resume it back, once it comes with in the user's view.
 
 ### .net Framework Namespacing
-The types are namespaced to match that of .net framework for easily locating the desired types from the TypeSharp library. e.g. Generics are placed in TS.System.Collection.Generics namespace.
+The types are namespaced to match that of .net framework for easily locating the desired types from the TypeSharp library. e.g. collection types are placed in TS.System.Collection namespace.
 
-Here's an example:
 
 
