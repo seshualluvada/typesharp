@@ -4,4 +4,5 @@ node_js:
 before_install:
 - npm install
 script:
-- gulp executetests
+- gulp buildall
+- gulp runspecs
