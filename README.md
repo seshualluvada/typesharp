@@ -1,6 +1,6 @@
-# [TypeSharp] (https://github.com/seshualluvada/typesharp) 
+# [TypeSharp] (https://github.com/seshualluvada/typesharp) [![Build Status](https://travis-ci.org/seshualluvada/typesharp.svg)](https://travis-ci.org/seshualluvada/typesharp.svg) [![Coverage Status](https://coveralls.io/repos/seshualluvada/typesharp/badge.svg?branch=master&service=github)](https://coveralls.io/github/seshualluvada/typesharp?branch=master)
 
-[![Build Status](https://travis-ci.org/seshualluvada/typesharp.svg)](https://travis-ci.org/seshualluvada/typesharp.svg) [![Coverage Status](https://coveralls.io/repos/seshualluvada/typesharp/badge.svg?branch=master&service=github)](https://coveralls.io/github/seshualluvada/typesharp?branch=master)
+
 
 This project implements .Net Framework C# types in typescript for a smooth transition from C# developer to typescript developer. Typescript provides a great entry point for developers with prior working knowledge of OOP concepts and not much experience working with core javascript, and this project leverages that opportunity to build types known to .net developers in typescript so that they can use a similar OOP mindset to write typescript code that finally runs in the browsers as javascript.
 
