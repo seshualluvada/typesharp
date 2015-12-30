@@ -85,7 +85,7 @@ gulp.task('buildspecs', function(done) {
 });
 
 gulp.task('buildall', function(done){
-  runSequence('buildscripts', 'buildall', done);
+  runSequence('buildscripts', 'buildspecs', done);
 });
 
 gulp.task('travis', function(){
