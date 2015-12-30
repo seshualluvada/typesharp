@@ -29,8 +29,8 @@ describe("StopWatch UnitTests ::", () => {
 
     it("StopWatch can measure time elapsed", () => {
         var elapsedTime: number = stopwatch.stop();
-        expect(elapsedTime).toBeGreaterThan(1900);
-        expect(elapsedTime).toBeLessThan(2100);
+        expect(elapsedTime).toBeGreaterThan(1800);
+        expect(elapsedTime).toBeLessThan(2200);
         try {
             stopwatch.stop();
         }
