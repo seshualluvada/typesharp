@@ -10,6 +10,8 @@ var concat = require('gulp-concat');
 var jasmine = require('gulp-jasmine');
 var filenames = require('gulp-filenames');
 var gprint = require('gulp-print');
+var coverage = require('gulp-coverage');
+var coveralls = require('gulp-coveralls');
 
 gulp.task('cleanscripts', function(){
     return del(['dev-build/scripts/**/*.js','dev-build/scripts/**/*.js.map', 'dev-build/scripts/**/*.d.ts']);
@@ -70,21 +72,41 @@ gulp.task('runspecs', function(){
    .pipe(jasmine());
 });
  
-gulp.task('executetests', function(){
-    runSequence(['cleanscripts', 'cleanspecs'], 'compilescripts', 'compilespecs', 'concatwithcode','runspecs')
+gulp.task('executetests', function(done){
+    runSequence('buildscripts', 'buildspecs', 'runspecs', done);
 });
 
-gulp.task('buildscripts', function() {
-    runSequence('cleanscripts','compilescripts');
+gulp.task('buildscripts', function(done) {
+    runSequence('cleanscripts','compilescripts', done);
 });
  
-gulp.task('buildspecs', function() {
-    runSequence( 'cleanspecs','compilespecs', 'concatwithcode');
+gulp.task('buildspecs', function(done) {
+    runSequence( 'cleanspecs','compilespecs', 'concatwithcode', done);
 });
 
-gulp.task('buildall', function(){
-  runSequence(['cleanscripts','cleanspecs'],'compilescripts','compilespecs', 'concatwithcode')  
+gulp.task('buildall', function(done){
+  runSequence('buildscripts', 'buildall', done);
 });
- 
 
+gulp.task('travis', function(){
+    return gulp.src('dev-build/spec/specfile.js')
+            .pipe(coverage.instrument({
+                pattern: ['dev-build/spec/specfile.js']
+            }))
+            .pipe(jasmine())
+            .pipe(coverage.gather())
+            .pipe(coverage.format(['lcov']))
+            .pipe(coveralls());
+}); 
+
+gulp.task('coverage', function(){
+    return gulp.src('dev-build/spec/specfile.js')
+            .pipe(coverage.instrument({
+                pattern: ['dev-build/spec/specfile.js']
+            }))
+            .pipe(jasmine())
+            .pipe(coverage.gather())
+            .pipe(coverage.format(['html']))
+            .pipe(gulp.dest('reports/'));
+});
 

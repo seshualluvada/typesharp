@@ -19,6 +19,8 @@
     "del": "^2.2.0",
     "gulp": "^3.9.0",
     "gulp-concat": "^2.6.0",
+    "gulp-coverage": "^0.3.38",
+    "gulp-coveralls": "^0.1.4",
     "gulp-filenames": "^2.0.0",
     "gulp-jasmine": "^2.2.1",
     "gulp-print": "^2.0.1",
