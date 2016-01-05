@@ -33,7 +33,7 @@ describe("PublishSubscribe UnitTests", () => {
         var notificationCountBefore = notificationCount;
         TS.Patterns.PublishSubscribe.notify("TestCase3Event", "This is a Test Message");
         var notificationCountAfter = notificationCount;
-        expect(notificationCountAfter - notificationCountBefore).toBe(3);
+        expect(notificationCountAfter - notificationCountBefore).toBe(2);
     });
 
 });
