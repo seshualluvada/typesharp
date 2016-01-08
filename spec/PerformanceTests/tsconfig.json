@@ -6,10 +6,8 @@
         "noEmitOnError": true,
         "sourceMap": true,
         "declaration": false,
-        "outFile": "dev-build/spec/typesharpspecs.js",
-        "target": "es5"
-    },
-    "exclude": [
-        "node_modules"
-    ]
+        "outFile": "dev-build/spec/performancespecs.js",
+        "target": "es5",
+        "suppressImplicitAnyIndexErrors": true
+    }
 }

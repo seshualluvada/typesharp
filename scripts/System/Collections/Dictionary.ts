@@ -1,23 +1,38 @@
 ﻿/// <reference path="./KeyValuePair" />
 /// <reference path="./List" />
+/// <reference path="../Utils" />
+
 
 module TS {
     export module System {
         export module Collections {
             export class Dictionary<TKey, TValue> implements IDictionary<TKey, TValue>  {
 
-                private keyValuePairCollection: List<KeyValuePair<TKey, TValue>>;
-
+                private keyValuePairCollection: {
+                    [id: string] : KeyValuePair<TKey,TValue>
+                };
+                private itemsCount: number = 0;
+                
                 constructor() {
-                    this.keyValuePairCollection = new List<KeyValuePair<TKey, TValue>>();
+                    this.keyValuePairCollection = {};
                 }
 
                 /**
-                 * returns a collection of the keys in the dictionary.
-                 * @returns ICollection<TKey>
+                 * returns a list of the keys in the dictionary.
+                 * @returns IList<TKey>
                  */
                 keys(): IList<TKey> {
-                     return this.keyValuePairCollection.select(item=> item.key);
+                    var keyList = new List<TKey>();
+                    for (var prop in this.keyValuePairCollection){
+                        if (this.keyValuePairCollection.hasOwnProperty(prop)){
+                            var retrievedKeyValuePair = this.keyValuePairCollection[prop];
+                            if (!((retrievedKeyValuePair == null) || (retrievedKeyValuePair == undefined))){
+                                keyList.add(retrievedKeyValuePair.key);
+                            } 
+                            
+                        }
+                    }
+                    return keyList;
                 }
 
                 /**
@@ -25,7 +40,16 @@ module TS {
                  * @returns ICollection<TValue>
                  */
                 values(): IList<TValue> {
-                     return this.keyValuePairCollection.select(item=> item.value);
+                    var valueList = new List<TValue>();
+                    for (var prop in this.keyValuePairCollection){
+                        if (this.keyValuePairCollection.hasOwnProperty(prop)){
+                            var retrievedKeyValuePair = this.keyValuePairCollection[prop];
+                            if (!((retrievedKeyValuePair == null) || (retrievedKeyValuePair == undefined))){
+                                valueList.add(retrievedKeyValuePair.value);
+                            } 
+                        }
+                    }
+                    return valueList;
                 }
 
                 /**
@@ -34,7 +58,13 @@ module TS {
                  * @returns boolean
                  */
                 containsKey(key: TKey): boolean {
-                     return this.keyValuePairCollection.trueForAny(item => item.key === key);
+                    var currentValue = this.keyValuePairCollection[Utils.serialize(key)];
+                     
+                    if (!((currentValue == undefined) || (currentValue == null))) {
+                        return true;
+                    } else{
+                        return false;
+                    }
                 }
 
                 /**
@@ -43,11 +73,14 @@ module TS {
                  * @returns number of items in the dictionary after adding
                  */
                 add(key: TKey, value: TValue): number {
-                    if (this.keyValuePairCollection.trueForAny(item=> item.key === key)) {
-                        throw new Error("Dictionary already contains an item with the key : " + key.toString());
+                    if (this.containsKey(key)){
+                        throw new Error("Dictionary already contains an item with the key : " + Utils.serialize(key));
                     } else {
-                        return this.keyValuePairCollection.add(new KeyValuePair(key, value));
+                        this.itemsCount++;
+                        this.keyValuePairCollection[Utils.serialize(key)] = new KeyValuePair(key, value);
                     }
+                    
+                    return this.itemsCount;
                 }
 
                 /**
@@ -56,8 +89,11 @@ module TS {
                  * @returns number of items in the dictionary after removing the keyvaluepair
                  */
                 remove(key: TKey): number {
-                    this.keyValuePairCollection.removeAll(item => (item.key === key));
-                    return this.keyValuePairCollection.length();
+                    if (this.containsKey(key)){
+                        this.keyValuePairCollection[Utils.serialize(key)] = undefined;
+                        this.itemsCount--;
+                    } 
+                    return this.itemsCount;
                 }
 
                 /**
@@ -66,8 +102,8 @@ module TS {
                  * @returns TValue
                  */
                 getValue(key: TKey): TValue {
-                    if (this.containsKey(key)) {
-                        return this.keyValuePairCollection.single(item => item.key === key).value;
+                    if (this.containsKey(key)){
+                        return this.keyValuePairCollection[Utils.serialize(key)].value;    
                     } else {
                         return null;
                     }
@@ -77,18 +113,32 @@ module TS {
                  * clear the items in the dictionary
                  */
                 clear() {
-                     this.keyValuePairCollection.clear();
+                    this.keyValuePairCollection = {};
+                    this.itemsCount = 0;
                 }
 
                 /**
                  * converts the dictionary to a list of keyvaluepairs
                  */
-                toList(): IList<KeyValuePair<TKey, TValue>> { return this.keyValuePairCollection; }
+                toList(): IList<KeyValuePair<TKey, TValue>> {
+                    var keyvaluepairList = new List<KeyValuePair<TKey,TValue>>();                   
+                    for (var prop in this.keyValuePairCollection){
+                        if (this.keyValuePairCollection.hasOwnProperty(prop)){
+                            var retrievedKeyValuePair = this.keyValuePairCollection[prop];
+                            if (!((retrievedKeyValuePair == null) || (retrievedKeyValuePair == undefined))){
+                                keyvaluepairList.add(retrievedKeyValuePair);
+                            } 
+                        }
+                    }                    
+                    return keyvaluepairList; 
+                }
 
                 /**
                  * converts the dictionary to a queryable collection of keyvaluepairs
                  */
-                asQueryable(): IQueryable<KeyValuePair<TKey, TValue>> { return this.keyValuePairCollection; }
+                asQueryable(): IQueryable<KeyValuePair<TKey, TValue>> { 
+                    return <List<KeyValuePair<TKey,TValue>>>this.toList(); 
+                }
             }
         }
     }

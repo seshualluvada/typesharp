@@ -5,8 +5,8 @@
         "preserveConstEnums": true,
         "noEmitOnError": true,
         "sourceMap": true,
-        "declaration": true,
-        "outFile": "dev-build/scripts/typesharp.js",
+        "declaration": false,
+        "outFile": "dev-build/spec/typesharpspecs.js",
         "target": "es5",
         "suppressImplicitAnyIndexErrors": true
     }
