@@ -6,3 +6,4 @@ before_install:
 script:
 - gulp buildall
 - gulp travis
+- gulp runperfs
