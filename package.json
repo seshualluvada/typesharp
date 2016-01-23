@@ -22,6 +22,7 @@
     "gulp-coverage": "^0.3.38",
     "gulp-coveralls": "^0.1.4",
     "gulp-filenames": "^2.0.0",
+    "gulp-fn": "0.0.0",
     "gulp-jasmine": "^2.2.1",
     "gulp-print": "^2.0.1",
     "gulp-shell": "^0.5.1",
