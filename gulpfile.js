@@ -12,6 +12,8 @@ var filenames = require('gulp-filenames');
 var gprint = require('gulp-print');
 var coverage = require('gulp-coverage');
 var coveralls = require('gulp-coveralls');
+var gulpFn = require('gulp-fn');
+var fs = require('fs');
 
 gulp.task('cleanscripts', function () {
     return del(['dev-build/scripts/**/*.js', 'dev-build/scripts/**/*.js.map', 'dev-build/scripts/**/*.d.ts']);
@@ -98,7 +100,7 @@ gulp.task('runperfs', function () {
 });
 
 gulp.task('executetests', function (done) {
-    runSequence('buildscripts', 'buildspecs', 'coverage', 'runperfs', done);
+    runSequence('buildscripts', 'buildspecs', 'coverage', done);
 });
 
 gulp.task('buildscripts', function (done) {
@@ -155,7 +157,14 @@ gulp.task('coverage', function () {
             }
         }))
         .pipe(coverage.gather())
-        .pipe(coverage.format(['html']))
-        .pipe(gulp.dest('reports/'));
+        .pipe(coverage.format(['json']))
+        .pipe(gulp.dest('reports/'))
+        .pipe(gulpFn(function(){
+          var coverageData = JSON.parse(fs.readFileSync('reports/coverage.json', 'utf8'));
+          console.log("Coverage Data" + coverageData.coverage);
+        }));
 });
 
+gulp.task('ts:watch', function(){
+  gulp.watch('**/*.ts',['executetests']);
+})
